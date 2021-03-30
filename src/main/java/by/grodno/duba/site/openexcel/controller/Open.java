@@ -2,6 +2,7 @@ package by.grodno.duba.site.openexcel.controller;
 
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 @Controller
 public class Open {
     @GetMapping("/open")
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args, Model model) throws IOException {
         String excelFilePath = "Test.xlsx";
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
@@ -23,15 +24,20 @@ public class Open {
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
 
-        while (iterator.hasNext()) {
+        model.addAttribute("cell", iterator);
+
+
+
+       while (iterator.hasNext()) {
             Row nextRow = iterator.next();
             Iterator<Cell> cellIterator = nextRow.cellIterator();
+            model.addAttribute("cellIterator", cellIterator);
 
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
-
-
-                System.out.print(cell.getCellType());
+                }}
+/*
+                     System.out.print(cell.getStringCellValue());
 
 //                switch (cell.getCellType()) {
 //                    case CellType.STRING:
@@ -51,5 +57,6 @@ public class Open {
 
         workbook.close();
         inputStream.close();
+*/
     }
 }
