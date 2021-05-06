@@ -34,7 +34,7 @@ public class Open {
 
 
                 Map<Integer, List<String>> data
-                        = excelPOIHelper.readExcel(excelFilePath);
+                        = excelPOIHelper.readExcel(inputStream);
                 model.addAttribute("data", data);
             } else {
                 model.addAttribute("message", "Not a valid excel file!");
@@ -45,17 +45,7 @@ public class Open {
         return "excel";
     }
 
-    public class MyCell {
-        private String content;
-        private String textColor;
-        private String bgColor;
-        private String textSize;
-        private String textWeight;
 
-        public MyCell(String content) {
-            this.content = content;
-        }
-    }
 }
 
 
