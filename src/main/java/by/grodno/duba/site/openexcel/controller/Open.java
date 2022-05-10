@@ -16,10 +16,24 @@ import by.grodno.duba.site.openexcel.poi.excel.ExcelPOIHelper;
 
 @Controller
 public class Open {
-    private static ExcelPOIHelper excelPOIHelper;
+
+
+    private ExcelPOIHelper excelPOIHelper;
+    private static String FILE_NAME = "Test.xlsx";
+    private String fileLocation;
+
 
     @GetMapping("/open")
-    public static String main(Model model) throws IOException {
+    public String main(Model model) throws IOException {
+        File currDir = new File(".");
+        String path = currDir.getAbsolutePath();
+        fileLocation = path.substring(0, path.length() - 1) + FILE_NAME;
+
+        excelPOIHelper = new ExcelPOIHelper();
+        excelPOIHelper.writeExcel();
+
+
+
         String excelFilePath = "Test.xlsx";
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
         Object cellValue = new Object();
@@ -34,7 +48,7 @@ public class Open {
 
 
                 Map<Integer, List<String>> data
-                        = excelPOIHelper.readExcel(inputStream);
+                        = excelPOIHelper.readExcel(fileLocation);
                 model.addAttribute("data", data);
             } else {
                 model.addAttribute("message", "Not a valid excel file!");
@@ -42,7 +56,7 @@ public class Open {
         } else {
             model.addAttribute("message", "File missing! Please upload an excel file.");
         }
-        return "excel";
+        return "open";
     }
 
 
