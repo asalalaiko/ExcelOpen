@@ -1,31 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Open Test</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center  p-1">
-            <table class="table table-hover">
+            <table>
 
-<!--                <tr>-->
-<!--                    <td th:text="${cell}" />-->
-<!--                </tr>-->
-<!--                <div>-->
-<!--                    <tr th:each="cellIterator : ${cellIterator}">-->
-
-<!--                        <td th:text="${cellIterator.cell}" />-->
-<!--                        <td>-->
-<!--                </div>-->
                 <div>
-                    <tr th:each="data : ${data}">
-
-                        <td th:text="${data}" />
+                    <tr th:each="dt : ${data}">
+                    <div th:each="val : ${dt.value}">
+                        <td th:text="${val}" />
+                    </div>
                 </div>
             </table>
     </div>
